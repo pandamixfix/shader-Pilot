@@ -13,7 +13,6 @@ import { generateAudioModulation } from '../services/GeminiService';
 import { v4 as uuidv4 } from 'uuid';
 import { ENABLE_AI_FEATURES } from '../config';
 import { ShopTab } from './ShopPanel'; // Import ShopTab
-import { IconGenerator } from './IconGenerator'; // Import IconGenerator
 
 const CANVAS_SIZES = [
     { label: 'Квадрат (По ширине)', value: '100%_square' },
@@ -1052,29 +1051,6 @@ const SettingsPanel: React.FC = () => {
                      </div>
                 </div>
             )}
-
-            {/* Meta Group */}
-            <div className="space-y-4 border-t border-gray-700 pt-4">
-                 <h3 className="text-sm font-semibold text-gray-400 px-1">Метаданные</h3>
-                <div>
-                    <label htmlFor="source-url" className="block text-xs text-gray-400 mb-1 ml-1">
-                        URL мира-источника:
-                    </label>
-                    <input
-                        id="source-url"
-                        type="text"
-                        value={sessionSource ?? ''}
-                        onChange={(e) => handleSourceChange(e.target.value)}
-                        placeholder="например, https://x.com/..."
-                        className="w-full p-2 bg-gray-900/80 border border-gray-600 rounded-md text-sm text-gray-200 focus:ring-2 focus:ring-cyan-500 outline-none"
-                    />
-                </div>
-            </div>
-
-            {/* Icon Generator */}
-            <div className="pt-4 border-t border-gray-700">
-                <IconGenerator />
-            </div>
         </div>
     );
 }
@@ -1218,7 +1194,7 @@ export const ControlsPanel: React.FC = () => {
   useEffect(() => {
     // When EDITMODE is off, we restrict access to complex tabs, but allow Ship and Sound.
     // We force switch to Sliders ONLY if the current tab is one of the restricted ones.
-    const restrictedTabs = ['terraform', 'collision', 'controls', 'settings'];
+    const restrictedTabs = ['terraform', 'collision', 'controls'];
     if (!EDITMODE && restrictedTabs.includes(activeTab)) {
       setActiveTab('sliders');
     }
